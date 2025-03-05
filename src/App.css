@@ -1,13 +1,17 @@
 .card-container {
   display: flex;
   align-items: center;
-  background-color: #b0d0e0;
+  background-color: #EBEAFF;
   padding: 15px;
   border-radius: 12px;
   width: 360px;
   position: relative;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave para dar profundidad */
-  border: 1px solid #9ab8c9; /* Borde sutil para mejor definición */
+  /* Sombra suave para dar profundidad */
+  /* box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);  */
+  box-shadow: 4px 4px 10px rgba(226, 215, 215, 0.466); 
+  border: 5px solid #0e0d0da2; 
+  /* border: 5px solid #ee2522;  */
+  /* Borde sutil para mejor definición */
   transition: transform 0.2s ease-in-out; /* Efecto de animación */
 }
 
@@ -27,6 +31,40 @@
   top: -10px;
   left: -10px;
 }
+.card-number-2 {
+  background-color: rgb(241, 13, 173);
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+  position: absolute;
+  top: -10px;
+  left: 340px;
+}
+
+.image{
+
+  background-color: #28a745;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 2px;
+  border-radius: 4px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+}
+
+.image img {
+  display: block;  /* Evita que la imagen flote */
+  margin: auto;  /* Centra la imagen */
+  max-width: 100%;  /* Asegura que no se desborde */
+  height: 50px;  /* Mantiene la proporción */
+}
+
+
 
 .card-content {
   flex: 1;
@@ -39,17 +77,19 @@
 
 .card-title {
   font-size: 20px;
-  /* font-weight: bold; */
-  /* margin-bottom: 15px; */
-  background-color: blue;
-  margin-left: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* background-color: blue; */
+  margin-left: 55px;
+  margin-right: 35px;
+  /* padding-bottom: 20px; */
   
 }
 
 .card-timer {
-  font-size: 14px;
+  font-size: 21px;
   margin-bottom: 5px;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   text-align: center;
 }
 
@@ -57,7 +97,8 @@
   display: flex;
   justify-content: center;
   gap: 5px;
-  background-color: aqua  ;
+  /* background-color: aqua  ; */
+  position: relative;
 }
 
 .status-box {

@@ -3,6 +3,8 @@ import './App.css';
 import beepGreen from './assets/sonidos/sonido3.mp3';
 import beepBlue from './assets/sonidos/sonido4.mp3';
 import beepYellow from './assets/sonidos/sonido5.mp3';
+import { FaStopwatch } from "react-icons/fa";
+
 
 export function Card({ children, userName, initialIsFollowing, number }) {
   const [seconds, setSeconds] = useState(0);
@@ -55,18 +57,25 @@ export function Card({ children, userName, initialIsFollowing, number }) {
 
   return (
     <article className={`card-container ${isBlinking ? `blinking ${blinkColor}` : ''}`}>
-      <div className="card-number">{number}</div>
+      {/* <div className="card-number">{number}</div> */}
+      <div className="card-number-2">{number}</div>
+      <div className='image'>
+        <img className='imgi' src="/images/mujer.png" alt="imagi" />
+      </div>
       <div className="card-content">
-        <strong className="card-title">{children}</strong>
-        <div className="card-timer">{formatTime(seconds)}</div>
+        <div  className="card-title"> <strong>{children}</strong></div>
+        <div className="card-timer">
+          <FaStopwatch/>{formatTime(seconds)}
+          </div>
         <div className="card-status-bar">
           <div className="status-box active"></div>
           <div className="status-box"></div>
           <div className="status-box"></div>
           <div className="status-box"></div>
           <div className="status-box"></div>
+          <div className="status-box"></div>
         </div>
-        <div className="buttons-container">
+        {/* <div className="buttons-container">
           <button onClick={() => handleBlink('green', beepGreen, true)} className={`blink-button green ${blinkColor === 'green' ? 'active' : ''}`}>
             {isBlinking && blinkColor === 'green' ? 'Detener' : 'Parpadear Verde'}
           </button>
@@ -76,7 +85,7 @@ export function Card({ children, userName, initialIsFollowing, number }) {
           <button onClick={() => handleBlink('yellow', beepYellow, true)} className={`blink-button yellow ${blinkColor === 'yellow' ? 'active' : ''}`}>
             {isBlinking && blinkColor === 'yellow' ? 'Detener' : 'Parpadear Amarillo'}
           </button>
-        </div>
+        </div> */}
       </div>
     </article>
   );
