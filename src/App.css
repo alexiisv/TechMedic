@@ -1,0 +1,158 @@
+.card-container {
+  display: flex;
+  align-items: center;
+  background-color: #b0d0e0;
+  padding: 15px;
+  border-radius: 12px;
+  width: 360px;
+  position: relative;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave para dar profundidad */
+  border: 1px solid #9ab8c9; /* Borde sutil para mejor definición */
+  transition: transform 0.2s ease-in-out; /* Efecto de animación */
+}
+
+.card-container:hover {
+  transform: scale(1.03); /* Pequeño zoom al pasar el cursor */
+}
+
+
+.card-number {
+  background-color: red;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+.card-content {
+  flex: 1;
+  text-align: center;
+  /* background-color: chartreuse; */
+  text-align: right;
+  margin-right: 10px;
+
+}
+
+.card-title {
+  font-size: 20px;
+  /* font-weight: bold; */
+  /* margin-bottom: 15px; */
+  background-color: blue;
+  margin-left: 20px;
+  
+}
+
+.card-timer {
+  font-size: 14px;
+  margin-bottom: 5px;
+  background-color: blueviolet;
+  text-align: center;
+}
+
+.card-status-bar {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  background-color: aqua  ;
+}
+
+.status-box {
+  width: 40px;
+  height: 15px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: transparenred;
+}
+
+.status-box.active {
+  background-color: green;
+}
+
+
+
+
+
+.blinking {
+  animation: blink-effect 0.5s infinite alternate;
+}
+
+.blinking.green {
+  animation: blink-green 0.5s infinite alternate;
+}
+
+.blinking.blue {
+  animation: blink-blue 0.5s infinite alternate;
+}
+
+.blinking.yellow {
+  animation: blink-yellow 0.5s infinite alternate;
+}
+
+@keyframes blink-green {
+  from {
+    background-color: rgba(0, 255, 0, 0.5);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes blink-blue {
+  from {
+    background-color: rgba(0, 0, 255, 0.5);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes blink-yellow {
+  from {
+    background-color: rgba(255, 255, 0, 0.5);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+.buttons-container {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.blink-button {
+  padding: 8px 12px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.blink-button.green {
+  background-color: #28a745;
+}
+
+.blink-button.blue {
+  background-color: #007bff;
+}
+
+.blink-button.yellow {
+  background-color: #ffc107;
+  color: black;
+}
+
+.blink-button.active {
+  opacity: 0.7;
+}
+
+.blink-button:hover {
+  opacity: 0.8;
+}
+
