@@ -3,7 +3,7 @@ import { Card } from './nurse1';
 
 const users = [
   {
-    name: 'LUIS ANTONIO ANDRADE NARVAEZ',
+    name: 'LUIS ANTONIO ANDRADE NARVAEZ NARVEAZ NARVAE NARVAEZ NARVAZZ',
     number: 339,
   },
   {
@@ -23,7 +23,7 @@ const users = [
     number: 340,
   },
   {
-    name: 'LUIS ANTONIO ANDRADE NARVAEZ',
+    name: 'LUIS ANTONIO ANTONIO CRUZ ANDRADE NARVAEZ',
     number: 340,
   },
   {
@@ -35,11 +35,11 @@ const users = [
     number: 340,
   },
   {
-    name: 'LUIS ANTONIO ANDRADE NARVAEZ',
+    name: 'LUIS ANTONIO ANTONIO XRUZ ANDRADE NARVAEZ',
     number: 340,
   },
   {
-    name: 'LUIS ANTONIO ANDRADE NARVAEZ',
+    name: 'LUIS ANTONIO ANDRADE NARVAEZ NARVEAZ NARVAE NARVAEZ NARVAZZ',
     number: 340,
   },
   {
@@ -50,6 +50,56 @@ const users = [
     name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
     number: 340,
   },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO  LUIS ANTONIO  ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'MARIA ELFRIDA DEL CASTILLO BELTRAN',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+  {
+    name: 'LUIS DAVID ANTONIO ANTONIO ANDRADE NARVAEZ',
+    number: 340,
+  },
+ 
+
   
  
 ];

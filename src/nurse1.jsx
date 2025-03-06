@@ -73,7 +73,7 @@ export function Card({ children, userName, initialIsFollowing, number }) {
           <div className="status-box"></div>
           <div className="status-box"></div>
           <div className="status-box"></div>
-          <div className="status-box"></div>
+          <div className="status-box active2"></div>
         </div>
         {/* <div className="buttons-container">
           <button onClick={() => handleBlink('green', beepGreen, true)} className={`blink-button green ${blinkColor === 'green' ? 'active' : ''}`}>
