@@ -3,7 +3,7 @@ import { Card } from './nurse1';
 
 const users = [
   {
-    name: 'LUIS ANTONIO ANDRADE NARVAEZ NARVEAZ NARVAE NARVAEZ NARVAZZ',
+    name: 'LUIS ANTONIO ANDRADE NARVAEZ NARVAE NARVAEZ NARVAZZ',
     number: 339,
   },
   {
