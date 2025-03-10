@@ -1,15 +1,11 @@
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import beepGreen from './assets/sonidos/sonido3.mp3';
 import beepBlue from './assets/sonidos/sonido4.mp3';
 import beepYellow from './assets/sonidos/sonido5.mp3';
 import { FaStopwatch, FaMars, FaVenus } from "react-icons/fa"; /* para iconos */
+import webSocketService from './services/websocket';
 
-//sockets
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
-
-const SOCKET_URL = 'http://localhost:8085/SerialAndRest';
 
 export function Card({ children,  number }) {
   const [seconds, setSeconds] = useState(0);
@@ -31,41 +27,108 @@ export function Card({ children,  number }) {
   // }, [intervalId]);
 
   useEffect(() => {
+    const syncData = () => {
+        const lastAction = localStorage.getItem("lastAction");
+        if (lastAction) {
+            const action = JSON.parse(lastAction);
+            console.log("🔄 Acción sincronizada:", action);
 
-    console.log('use efecttt ejecutado');
-    fetch('https://dummyjson.com/users')
-    .then(res=>res.json())
-    .then(data=>{
-    console.log(data.users)
-    setUsers(data.users)
-  })
-      
+            if (action.color === 'blue') {
+                triggerBlink(action.color, beepBlue, false);
+            }
+        }
+    };
 
-    // Conectar al WebSocket
-    const socket = new SockJS(SOCKET_URL);
-    const client = Stomp.over(socket);
+    webSocketService.connect((data) => {
+        console.log("🔔 Evento WebSocket recibido:", data);
+        if (data.color === 'blue') {
+            triggerBlink(data.color, beepBlue, false);
+        }
+    });
 
-    client.connect({}, () => {
-      console.log('🔌 Conectado al WebSocket');
+    window.addEventListener("storage", syncData);
 
-      // Suscribirse a los llamados de enfermería
-      // client.subscribe('/topic/llamado', (message) => {
-      //   const data = JSON.parse(message.body);
-      //   console.log('Mensaje recibido:', data);
+    return () => {
+        webSocketService.disconnect();
+        window.removeEventListener("storage", syncData);
+    };
+}, []);
 
-      //   // // Si el mensaje contiene el número de la tarjeta, parpadea y suena
-      //   // if (data.number === number) {
-      //   //   handleBlink('red', beepBlue); // Ajusta el color y sonido según el tipo de llamado
-      //   // }
-      // });
 
-      setStompClient(client);
+
+  useEffect(() => {
+    webSocketService.connect((data) => {
+        console.log("🔔 Nuevo mensaje recibido:", data);
+        // Aquí puedes manejar los datos recibidos en la UI
     });
 
     return () => {
-      if (client) client.disconnect();
+        webSocketService.disconnect();
     };
-  }, [number]);
+}, []);
+
+useEffect(() => {
+  const syncData = () => {
+      const lastMessage = localStorage.getItem("lastMessage");
+      if (lastMessage) {
+          const message = JSON.parse(lastMessage);
+          console.log("🔄 Datos sincronizados desde localStorage:", message);
+          setUsers((prev) => [...prev, message]);
+      }
+  };
+
+  // Conectar al WebSocket
+  webSocketService.connect((data) => {
+      console.log("🔔 Nuevo mensaje recibido:", data);
+
+      // Guardar en localStorage para que otras ventanas lo reciban
+      localStorage.setItem("lastMessage", JSON.stringify(data));
+
+      // Actualizar la UI con el nuevo mensaje
+      setUsers((prev) => [...prev, data]);
+  });
+
+  // Escuchar cambios en localStorage (sincronización entre pestañas)
+  window.addEventListener("storage", syncData);
+
+  return () => {
+      // Desconectar el WebSocket al desmontar el componente
+      webSocketService.disconnect();
+
+      // Remover el listener de localStorage
+      window.removeEventListener("storage", syncData);
+  };
+}, []);
+
+// Función para activar el parpadeo sincronizado
+const triggerBlink = (color, soundFile, playOnce = false) => {
+  setIsBlinking(true);
+  setBlinkColor(color);
+  clearInterval(intervalId);
+
+  if (playOnce) {
+      new Audio(soundFile).play();
+  } else {
+      const id = setInterval(() => {
+          new Audio(soundFile).play();
+      }, 1000);
+      setIntervalId(id);
+  }
+};
+
+// 🔵 Función para el botón azul
+const handleBlueButtonClick = () => {
+  const action = { color: 'blue' };
+
+  // 📡 Enviar acción por WebSocket
+  webSocketService.sendMessage("/topic/llamado", action);
+
+  // 💾 Guardar en localStorage para sincronizar entre pestañas
+  localStorage.setItem("lastAction", JSON.stringify(action));
+
+  // 🔄 Activar en la misma ventana
+  triggerBlink(action.color, beepBlue, false);
+};
 
 
   const formatTime = (secs) => {
@@ -150,7 +213,7 @@ export function Card({ children,  number }) {
           <button onClick={() => handleBlink('green', beepGreen, true)} className={`blink-button green ${blinkColor === 'green' ? 'active' : ''}`}>
             {isBlinking && blinkColor === 'green' ? 'Detener' : 'Parpadear Verde'}
           </button>
-          <button onClick={() => handleBlink('blue', beepBlue, false)} className={`blink-button blue ${blinkColor === 'blue' ? 'active' : ''}`}>
+          <button onClick={() => handleBlueButtonClick('blue', beepBlue, false)} className={`blink-button blue ${blinkColor === 'blue' ? 'active' : ''}`}>
             {isBlinking && blinkColor === 'blue' ? 'Detener' : 'Parpadear Azul'}
           </button>
           <button onClick={() => handleBlink('yellow', beepYellow, true)} className={`blink-button yellow ${blinkColor === 'yellow' ? 'active' : ''}`}>
