@@ -5,8 +5,13 @@ import beepBlue from './assets/sonidos/sonido4.mp3';
 import beepYellow from './assets/sonidos/sonido5.mp3';
 import { FaStopwatch, FaMars, FaVenus } from "react-icons/fa"; /* para iconos */
 
+//sockets
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 
-export function Card({ children, userName, initialIsFollowing, number }) {
+const SOCKET_URL = 'http://localhost:8085/SerialAndRest';
+
+export function Card({ children,  number }) {
   const [seconds, setSeconds] = useState(0);
   const [isBlinking, setIsBlinking] = useState(false);
   const [blinkColor, setBlinkColor] = useState('');
@@ -15,13 +20,53 @@ export function Card({ children, userName, initialIsFollowing, number }) {
   const [imagen, setImage] = useState(null);
   const [colorMarco, setColorMarco] = useState("border-black")
   const [isRunning, setIsRunning] = useState(false);
+  const [stompClient, setStompClient] = useState(null);
+  const [users, setUsers] = useState([]);
 
+
+  // useEffect(() => {
+  //   return () => {
+  //     if (intervalId) clearInterval(intervalId);
+  //   };
+  // }, [intervalId]);
 
   useEffect(() => {
+
+    console.log('use efecttt ejecutado');
+    fetch('https://dummyjson.com/users')
+    .then(res=>res.json())
+    .then(data=>{
+    console.log(data.users)
+    setUsers(data.users)
+  })
+      
+
+    // Conectar al WebSocket
+    const socket = new SockJS(SOCKET_URL);
+    const client = Stomp.over(socket);
+
+    client.connect({}, () => {
+      console.log('🔌 Conectado al WebSocket');
+
+      // Suscribirse a los llamados de enfermería
+      // client.subscribe('/topic/llamado', (message) => {
+      //   const data = JSON.parse(message.body);
+      //   console.log('Mensaje recibido:', data);
+
+      //   // // Si el mensaje contiene el número de la tarjeta, parpadea y suena
+      //   // if (data.number === number) {
+      //   //   handleBlink('red', beepBlue); // Ajusta el color y sonido según el tipo de llamado
+      //   // }
+      // });
+
+      setStompClient(client);
+    });
+
     return () => {
-      if (intervalId) clearInterval(intervalId);
+      if (client) client.disconnect();
     };
-  }, [intervalId]);
+  }, [number]);
+
 
   const formatTime = (secs) => {
     const hours = String(Math.floor(secs / 3600)).padStart(2, '0');
